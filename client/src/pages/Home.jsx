@@ -34,8 +34,8 @@ const Headline = styled.div`
 
 const Span = styled.div`
   font-size: 30px;
-  font-weight: 300;
-  color: ${({ theme }) => theme.text_primary};
+  font-weight: 700;
+  color: ${({ theme }) => theme.text_secondary};
   display: flex;
   align-items: center;
   flex-direction: column;
