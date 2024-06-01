@@ -93,6 +93,11 @@ const Home = () => {
         </CardWrapper>
       </Wrapper>
     </Container>
+`;
+
+const Home = () => {
+  return (
+    <Container>Home</Container>
   )
 }
 
