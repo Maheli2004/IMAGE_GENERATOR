@@ -13,10 +13,6 @@ const SearchBarContainer = styled.div`
     cursor: pointer;
     gap: 6px;
     align-items: center;
-
-//   @media (max-width: 768px) {
-//     padding: 6px 10px;
-//   }
 `;
 
 const SearchBar = () => {
