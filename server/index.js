@@ -2,7 +2,8 @@ import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import PostRouters from "./routes/Posts.js";
+import PostRouter from "./routes/Posts.js";
+import GenerateImageRouter from "./routes/GenerateImage.js";
 
 dotenv.config();
 
@@ -22,7 +23,8 @@ app.use((err,req,res,next) => {
     });
 });
 
-app.use("/api/post", PostRouters);
+app.use("/api/post", PostRouter);
+app.use("/api/generateImage", GenerateImageRouter);
 
 //Default get
 app.get("/", async (req,res) => {

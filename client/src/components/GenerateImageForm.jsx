@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate} from "react-router-dom";
 import styled from 'styled-components';
 import Button from "./button";
 import TextInput from "./TextInput";
 import { AutoAwesome, CreateRounded } from '@mui/icons-material';
+import { CreatePost, GenerateAIImage } from '../api';
 
 const Form = styled.div`
     flex: 1;
@@ -53,11 +55,33 @@ const GenerateImageForm = ({
             generateImageLoading,
             setCreatePostLoading,
     }) => {
-        const generateImageFun = () => {
+        const navigate = useNavigate();
+        const [error, setErorr] = useState("");
+        const generateImageFun = async () => {
             setGenerateImageLoading(true);
+            await GenerateAIImage({prompt: post.prompt}).then((res)=> {
+                setPost({
+                    ...post, 
+                    photo: `data:image/jpge;base64,${res?.data?.photo}`
+                });
+                setGenerateImageLoading(false);
+            })
+            .catch((error)=> {
+                setErorr(error?.response?.data?.message);
+                setGenerateImageLoading(false);
+            });
         };
-        const createPostFun = () => {
+        const createPostFun = async () => {
             setCreatePostLoading(true);
+            await CreatePost(post)
+            .then((res)=> {
+                setCreatePostLoading(false);
+                navigate("/")
+            })
+            .catch((error)=> {
+                setErorr(error?.response?.data?.message);
+                setCreatePostLoading(false);
+            });
         };
   return (
     <Form>
@@ -82,6 +106,7 @@ const GenerateImageForm = ({
                 value={post.prompt}
                 handelChange={(e)=>setPost({...post,prompt: e.target.value})}
             />
+            {error && <div style={{color: "red"}} >{error}</div>}
             **You can post the AI Generated Image to the Community **
         </Body>
         <Actions>
