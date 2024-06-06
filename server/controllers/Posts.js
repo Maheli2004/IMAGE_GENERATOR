@@ -5,17 +5,12 @@ import { v2 as cloudinary} from "cloudinary";
 
 dotenv.config();
 
-cloudinary.config({ 
-    cloud_name: 'dst3j9bao', 
-    api_key: '126464361945147', 
-    api_secret: '0-kaDgMcbHhiOOGazkjY74XyDls' 
-  });
 
-// cloudinary.config({ 
-//     cloud_name: process.env.CLOUD_NAME, 
-//     api_key: process.env.API_KEY, 
-//     api_secret: process.env.API_SECRET 
-// });
+cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET 
+});
 
 //get all posts
 export const getAllPosts = async (req, res, next) => {
